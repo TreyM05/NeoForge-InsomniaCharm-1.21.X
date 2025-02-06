@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {"item": "minecraft:glass"},
+    "I": {"item": "insomniacharm:insomniashard"},
+    "#": {"item": "minecraft:gold_ingot"}
+  },
+  "pattern": [
+    " # ",
+    "GIG",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "insomniacharm:insomniacharm"
+  }
+}

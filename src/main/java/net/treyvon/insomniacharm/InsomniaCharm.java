@@ -1,5 +1,16 @@
 package net.treyvon.insomniacharm;
 
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
+import net.treyvon.insomniacharm.effect.ModEffects;
+import net.treyvon.insomniacharm.item.ModItems;
+import net.treyvon.insomniacharm.item.custom.CharmItem;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -16,6 +27,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import top.theillusivec4.curios.api.CuriosApi;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(InsomniaCharm.MOD_ID)
@@ -36,6 +48,10 @@ public class InsomniaCharm
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+        ModItems.register(modEventBus);
+
+        ModEffects.register(modEventBus);
+
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -43,23 +59,32 @@ public class InsomniaCharm
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
 
     }
 
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
+
+                // Add the example block item to the building blocks tab
+        private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-;
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.INSOMNIACHARM);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.CHARMINSOMNIA);
+        }
     }
+
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
-
     }
+
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -71,4 +96,6 @@ public class InsomniaCharm
 
         }
     }
+
+
 }

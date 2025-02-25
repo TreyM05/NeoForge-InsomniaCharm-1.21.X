@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "G": {"item": "minecraft:glass"},
-    "I": {"item": "insomniacharm:insomniashard"},
+    "I": {"item": "minecraft:phantom_membrane"},
     "#": {"item": "minecraft:gold_ingot"}
   },
   "pattern": [
